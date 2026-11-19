@@ -3,55 +3,218 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>الواقع المعزز | أهداف التنمية المستدامة</title>
+<title>ليبيا نحو مستقبل مستدام</title>
 <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 <style>
-*{box-sizing:border-box} body{margin:0;background:#071d2b;color:#fff;font-family:Tahoma,Arial,sans-serif}
-#intro{padding:18px;text-align:center;background:#103b4a} h1{font-size:22px;margin:4px 0 8px} p{margin:6px 0;color:#d4e7e3;line-height:1.6}
-#status{font-size:14px;color:#59d0c7;margin-top:8px}
-#panel{position:fixed;z-index:20;bottom:12px;left:10px;right:10px;max-height:52vh;overflow:auto;background:rgba(7,29,43,.96);border:1px solid #59d0c7;border-radius:16px;padding:12px;display:none;box-shadow:0 8px 30px #0008}
-#panel h2{font-size:18px;margin:0 0 8px;color:#f0cc7a} #panel ul{padding-right:22px;line-height:1.8;margin:6px 0}
-#grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-.goalbtn{border:0;border-radius:9px;padding:9px 4px;background:#17495a;color:white;font-size:12px;min-height:42px}
-.goalbtn.active{background:#d6a52a;color:#071d2b;font-weight:bold}
-#close{float:left;background:transparent;color:#fff;border:1px solid #789;border-radius:8px;padding:4px 9px}
-#permission{margin:10px auto;display:block;padding:12px 18px;border:0;border-radius:10px;background:#d6a52a;color:#071d2b;font-weight:bold;font-size:16px}
-a{color:#59d0c7}
+*{box-sizing:border-box}
+body{margin:0;background:#071d2b;color:white;font-family:Tahoma,Arial}
+#intro{text-align:center;padding:15px;background:#103b4a}
+h1{font-size:21px;margin:5px}
+p{line-height:1.7}
+#permission{padding:12px 20px;background:#d6a52a;border:0;border-radius:10px;font-weight:bold}
+#status{color:#59d0c7;margin:10px}
+#panel{position:fixed;z-index:20;bottom:10px;left:10px;right:10px;
+background:#071d2bf2;border:1px solid #59d0c7;border-radius:15px;
+padding:13px;text-align:center;display:none}
+#panel h2{color:#f0cc7a;font-size:19px}
+#panel ul{text-align:right;line-height:1.8}
+#counter{color:#59d0c7}
 </style>
 </head>
 <body>
+
 <div id="intro">
-<h1>أهداف التنمية المستدامة الـ17</h1>
-<p>اضغطي «بدء الكاميرا»، ثم وجّهي الهاتف نحو اللوحة المطبوعة. بعد التعرّف عليها اختاري أي هدف لعرض غايتين فرعيتين.</p>
+<h1>ليبيا نحو مستقبل مستدام</h1>
+<p>رحلة تفاعلية عبر أهداف التنمية المستدامة السبعة عشر</p>
 <button id="permission">بدء تجربة الواقع المعزز</button>
-<div id="status">يلزم فتح المشروع عبر HTTPS ومنح إذن الكاميرا.</div>
+<div id="status">وجّهي الكاميرا نحو اللوحة المطبوعة</div>
 </div>
+
 <div id="panel">
-<button id="close">إغلاق</button><h2 id="goalTitle">اختاري هدفًا</h2>
+<div id="counter"></div>
+<h2 id="goalTitle"></h2>
 <ul id="targetList"></ul>
-<div id="grid"></div>
 </div>
-<a-scene mindar-image="imageTargetSrc: ./targets.mind; autoStart: false; uiLoading: no; uiScanning: no; uiError: no;" embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-<a-entity mindar-image-target="targetIndex: 0" id="trackedTarget"></a-entity>
+
+<a-scene
+mindar-image="imageTargetSrc: ./targets.mind; autoStart: false; uiLoading: no; uiScanning: no; uiError: no;"
+embedded
+color-space="sRGB"
+renderer="colorManagement: true"
+vr-mode-ui="enabled: false"
+device-orientation-permission-ui="enabled: false">
+
+<a-assets>
+<img id="libyaMap" src="./libya-map.png">
+</a-assets>
+
+<a-camera position="0 0 0"
+look-controls="enabled: false"></a-camera>
+
+<a-entity mindar-image-target="targetIndex: 0" id="trackedTarget">
+
+<a-image src="#libyaMap"
+position="0 0 0.02"
+width="1.3"
+height="0.85">
+</a-image>
+
+<a-text id="arTitle"
+value="ليبيا نحو الاستدامة"
+position="0 -0.48 0.04"
+align="center"
+color="#ffffff"
+width="1.8"
+scale="0.65 0.65 0.65">
+</a-text>
+
+<a-text id="arGoal"
+value="أهداف التنمية المستدامة"
+position="0 0.53 0.04"
+align="center"
+color="#f0cc7a"
+width="2"
+scale="0.55 0.55 0.55">
+</a-text>
+
+<a-plane id="sunsetSky"
+position="0 0 -0.08"
+width="2.2"
+height="1.5"
+color="#64c9dc"
+visible="false">
+</a-plane>
+
+<a-circle position="0.65 0.48 0.02"
+radius="0.12"
+color="#ffdc65"
+visible="false"
+id="sun">
+</a-circle>
+
+<a-plane position="0 -0.55 0.03"
+width="2.2"
+height="0.35"
+color="#168ca1"
+visible="false"
+id="sea">
+</a-plane>
+
+<a-text id="finalText"
+value="ليبيا نحو مستقبل مستدام"
+position="0 -0.12 0.1"
+align="center"
+color="#ffffff"
+width="2.5"
+scale="0.8 0.8 0.8"
+visible="false">
+</a-text>
+
+</a-entity>
 </a-scene>
+
+<div id="goalData" style="display:none"></div>
+
 <script>
-const goals=[{"id": 1, "name": "القضاء على الفقر", "targets": ["1.2 خفض نسبة من يعيشون في الفقر بجميع أبعاده", "1.3 توفير نظم حماية اجتماعية للجميع"]}, {"id": 2, "name": "القضاء التام على الجوع", "targets": ["2.1 ضمان حصول الجميع على غذاء كافٍ وآمن", "2.4 اعتماد نظم إنتاج غذائي مستدامة"]}, {"id": 3, "name": "الصحة الجيدة والرفاه", "targets": ["3.8 تحقيق التغطية الصحية الشاملة", "3.9 الحد من الأمراض والوفيات الناتجة عن التلوث"]}, {"id": 4, "name": "التعليم الجيد", "targets": ["4.1 ضمان إتمام التعليم الابتدائي والثانوي الجيد", "4.5 إزالة الفوارق في فرص التعليم"]}, {"id": 5, "name": "المساواة بين الجنسين", "targets": ["5.1 إنهاء جميع أشكال التمييز ضد النساء والفتيات", "5.5 ضمان المشاركة والفرص القيادية المتكافئة"]}, {"id": 6, "name": "المياه النظيفة والنظافة الصحية", "targets": ["6.1 توفير مياه شرب مأمونة وميسورة للجميع", "6.3 تحسين جودة المياه والحد من التلوث"]}, {"id": 7, "name": "طاقة نظيفة وبأسعار معقولة", "targets": ["7.2 زيادة حصة الطاقة المتجددة", "7.3 مضاعفة معدل التحسن في كفاءة الطاقة"]}, {"id": 8, "name": "العمل اللائق ونمو الاقتصاد", "targets": ["8.5 تحقيق العمالة الكاملة والعمل اللائق", "8.4 تحسين كفاءة استخدام الموارد وفصل النمو عن التدهور البيئي"]}, {"id": 9, "name": "الصناعة والابتكار والهياكل الأساسية", "targets": ["9.1 تطوير بنية أساسية موثوقة ومستدامة", "9.4 تحديث الصناعة ورفع كفاءتها البيئية"]}, {"id": 10, "name": "الحد من أوجه عدم المساواة", "targets": ["10.2 تعزيز الإدماج الاجتماعي والاقتصادي والسياسي", "10.4 اعتماد سياسات تحقق مساواة أكبر"]}, {"id": 11, "name": "مدن ومجتمعات محلية مستدامة", "targets": ["11.2 توفير نظم نقل آمنة ومستدامة", "11.6 خفض الأثر البيئي للمدن وتحسين جودة الهواء"]}, {"id": 12, "name": "الاستهلاك والإنتاج المسؤولان", "targets": ["12.2 تحقيق الإدارة المستدامة والاستخدام الكفء للموارد", "12.4 الإدارة السليمة للمواد الكيميائية والنفايات"]}, {"id": 13, "name": "العمل المناخي", "targets": ["13.1 تعزيز القدرة على التكيف مع الأخطار المناخية", "13.2 إدماج تدابير المناخ في السياسات الوطنية"]}, {"id": 14, "name": "الحياة تحت الماء", "targets": ["14.1 الحد من التلوث البحري، ولا سيما التلوث البري", "14.2 حماية النظم الإيكولوجية البحرية والساحلية"]}, {"id": 15, "name": "الحياة في البر", "targets": ["15.1 حفظ النظم الإيكولوجية البرية والمياه الداخلية", "15.5 الحد من تدهور الموائل وفقدان التنوع البيولوجي"]}, {"id": 16, "name": "السلام والعدل والمؤسسات القوية", "targets": ["16.6 بناء مؤسسات فعالة وخاضعة للمساءلة", "16.7 ضمان اتخاذ قرارات شاملة وتشاركية"]}, {"id": 17, "name": "عقد الشراكات لتحقيق الأهداف", "targets": ["17.16 تعزيز الشراكات العالمية لتبادل المعرفة", "17.18 تعزيز توافر البيانات والإحصاءات الموثوقة"]}];
-const panel=document.getElementById('panel'), grid=document.getElementById('grid');
-const title=document.getElementById('goalTitle'), list=document.getElementById('targetList');
-let selected=1;
-function showGoal(n){selected=n;const g=goals[n-1];title.textContent='الهدف '+g.id+': '+g.name;list.innerHTML=g.targets.map(t=>'<li>'+t+'</li>').join('');document.querySelectorAll('.goalbtn').forEach(b=>b.classList.toggle('active',+b.dataset.id===n));}
-goals.forEach(g=>{const b=document.createElement('button');b.className='goalbtn';b.dataset.id=g.id;b.textContent=g.id+' · '+g.name;b.onclick=()=>showGoal(g.id);grid.appendChild(b);});
-showGoal(1);
-document.getElementById('close').onclick=()=>panel.style.display='none';
-const scene=document.querySelector('a-scene');
-const target=document.getElementById('trackedTarget');
-target.addEventListener('targetFound',()=>{document.getElementById('status').textContent='تم التعرّف على اللوحة. اختاري الهدف المطلوب.';panel.style.display='block';});
-target.addEventListener('targetLost',()=>{document.getElementById('status').textContent='وجّهي الكاميرا إلى اللوحة مرة أخرى.';});
-document.getElementById('permission').onclick=async()=>{
- try{const arSystem=scene.systems['mindar-image-system'];await arSystem.start();document.getElementById('status').textContent='الكاميرا تعمل… وجّهيها إلى اللوحة المطبوعة.';}
- catch(e){document.getElementById('status').textContent='تعذّر تشغيل الكاميرا: '+e.message+' — تأكدي من HTTPS وإذن الكاميرا.';}
+const goals=[
+["القضاء على الفقر","1.2 خفض نسبة الفقر بجميع أبعاده","1.3 توفير نظم الحماية الاجتماعية"],
+["القضاء التام على الجوع","2.1 ضمان حصول الجميع على غذاء كافٍ وآمن","2.4 اعتماد نظم إنتاج غذائي مستدامة"],
+["الصحة الجيدة والرفاه","3.8 تحقيق التغطية الصحية الشاملة","3.9 الحد من الأمراض الناتجة عن التلوث"],
+["التعليم الجيد","4.1 ضمان التعليم الابتدائي والثانوي الجيد","4.5 إزالة الفوارق في فرص التعليم"],
+["المساواة بين الجنسين","5.1 إنهاء التمييز ضد النساء والفتيات","5.5 ضمان المشاركة المتكافئة"],
+["المياه النظيفة والنظافة الصحية","6.1 توفير مياه شرب مأمونة","6.3 تحسين جودة المياه والحد من التلوث"],
+["طاقة نظيفة وبأسعار معقولة","7.2 زيادة حصة الطاقة المتجددة","7.3 تحسين كفاءة الطاقة"],
+["العمل اللائق ونمو الاقتصاد","8.5 تحقيق العمل اللائق","8.4 تحسين كفاءة استخدام الموارد"],
+["الصناعة والابتكار والهياكل الأساسية","9.1 تطوير بنية أساسية مستدامة","9.4 تحديث الصناعة ورفع كفاءتها البيئية"],
+["الحد من أوجه عدم المساواة","10.2 تعزيز الإدماج الاجتماعي والاقتصادي","10.4 اعتماد سياسات تحقق المساواة"],
+["مدن ومجتمعات محلية مستدامة","11.2 توفير نظم نقل مستدامة","11.6 خفض الأثر البيئي للمدن"],
+["الاستهلاك والإنتاج المسؤولان","12.2 الإدارة المستدامة للموارد","12.4 الإدارة السليمة للنفايات"],
+["العمل المناخي","13.1 تعزيز التكيف مع الأخطار المناخية","13.
+2 إدماج المناخ في السياسات الوطنية"],
+["الحياة تحت الماء","14.1 الحد من التلوث البحري","14.2 حماية النظم البحرية والساحلية"],
+["الحياة في البر","15.1 حفظ النظم الإيكولوجية البرية","15.5 الحد من فقدان التنوع البيولوجي"],
+["السلام والعدل والمؤسسات القوية","16.6 بناء مؤسسات فعالة","16.7 ضمان اتخاذ قرارات تشاركية"],
+["عقد الشراكات لتحقيق الأهداف","17.16 تعزيز الشراكات العالمية","17.18 تعزيز البيانات والإحصاءات"]
+];
+
+const panel=document.getElementById("panel");
+const title=document.getElementById("goalTitle");
+const list=document.getElementById("targetList");
+const counter=document.getElementById("counter");
+const arGoal=document.getElementById("arGoal");
+const arTitle=document.getElementById("arTitle");
+const finalText=document.getElementById("finalText");
+const sky=document.getElementById("sunsetSky");
+const sun=document.getElementById("sun");
+const sea=document.getElementById("sea");
+const status=document.getElementById("status");
+const target=document.getElementById("trackedTarget");
+const scene=document.querySelector("a-scene");
+
+let timer=null;
+let current=0;
+
+function showGoal(index){
+const g=goals[index];
+counter.textContent="الهدف "+(index+1)+" من 17";
+title.textContent=g[0];
+list.innerHTML="<li>"+g[1]+"</li><li>"+g[2]+"</li>";
+arGoal.setAttribute("value","الهدف "+(index+1)+": "+g[0]);
+arTitle.setAttribute("value","ليبيا نحو الاستدامة");
+panel.style.display="block";
+}
+
+function finishJourney(){
+panel.style.display="none";
+arGoal.setAttribute("value","مستقبل أكثر استدامة");
+arTitle.setAttribute("visible","false");
+sky.setAttribute("visible","true");
+sun.setAttribute("visible","true");
+sea.setAttribute("visible","true");
+finalText.setAttribute("visible","true");
+status.textContent="ليبيا نحو مستقبل مستدام";
+}
+
+function startJourney(){
+clearInterval(timer);
+current=0;
+sky.setAttribute("visible","false");
+sun.setAttribute("visible","false");
+sea.setAttribute("visible","false");
+finalText.setAttribute("visible","false");
+arTitle.setAttribute("visible","true");
+showGoal(current);
+
+timer=setInterval(()=>{
+current++;
+if(current<goals.length){
+showGoal(current);
+}else{
+clearInterval(timer);
+finishJourney();
+}
+},3000);
+}
+
+target.addEventListener("targetFound",()=>{
+status.textContent="بدأت رحلة أهداف التنمية المستدامة";
+startJourney();
+});
+
+target.addEventListener("targetLost",()=>{
+clearInterval(timer);
+status.textContent="وجّهي الكاميرا إلى اللوحة مرة أخرى";
+});
+
+document.getElementById("permission").onclick=async()=>{
+try{
+await scene.systems["mindar-image-system"].start();
+status.textContent="الكاميرا تعمل... وجّهيها نحو اللوحة";
+}catch(e){
+status.textContent="تعذّر تشغيل الكاميرا: "+e.message;
+}
 };
 </script>
-</body></html>
+</body>
+</html>
